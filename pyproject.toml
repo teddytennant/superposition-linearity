@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "superposition-linearity"
+version = "0.1.0"
+description = "Superposition linearity checks and joint contrastive decoding (arXiv:2609.29845)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["jax", "numpy", "optax"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

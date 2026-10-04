@@ -1,0 +1,7 @@
+# Superposition linearity
+
+A tiny decoder-only transformer in JAX that checks the superposition linearity hypothesis and joint contrastive decoding from Tikhonov et al., arXiv 2609.29845. Two equal-length token sequences are embedded, the same positional embedding is added to both, and those embeddings are averaged before a single transformer forward. A self-distillation loss trains the mixed-input student toward the arithmetic mean of two stop-gradient teacher distributions. Joint contrastive decoding builds per-stream logits from the mixed large-model pass plus a small model on each stream alone, using scalar coefficients alpha and beta.
+
+Install from this directory with `pip install -e .` (Python 3.11 or newer; dependencies are JAX, NumPy, and Optax; pytest is optional). Run the seeded toy script with `python train.py`. Run the checks with `python -m pytest -q`.
+
+What this does not match: this is not Pythia or Llama, there is no FineWeb data, and no KL ratios from the paper are claimed. The tau^2 multiplier on the distillation KL is the usual distillation temperature factor; the paper writes the KL without spelling that factor. The large and small models in joint contrastive decoding can be the same module.
